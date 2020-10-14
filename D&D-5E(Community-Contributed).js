@@ -4,7 +4,7 @@
 // @description		Adds the roll20 macro calls to the sidebar form the cahracter sheet
 // @author			Ben Samsom
 // @match			https://app.roll20.net/editor/
-// @source          https://github.com/bsamsom/D&D-5E(Community-Contributed)
+// @source          https://github.com/bsamsom/D&D-5E(Community-Contributed).js
 // @grant			GM_setValue
 // @grant			GM_getValue
 // ==/UserScript==
