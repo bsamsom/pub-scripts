@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name			Roll20 Macro buttons
-// @version			0.1
+// @version			0.2
 // @description		Adds the roll20 macro calls to the sidebar form the cahracter sheet
 // @author			Ben Samsom
 // @match			https://app.roll20.net/editor/
