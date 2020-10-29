@@ -1,60 +1,16 @@
-// ==UserScript==
-// @name			Roll20 Macro buttons
-// @version			0.2
-// @description		Adds the roll20 macro calls to the sidebar form the cahracter sheet
+// @description		Some fixes for roll 20
 // @author			Ben Samsom
 // @match			https://app.roll20.net/editor/
-// @source          https://github.com/bsamsom/D&D-5E(Community-Contributed).js
+// @source          https://github.com/bsamsom/pub-scripts/D&D-5E(Community-Contributed).js
 // @grant			GM_setValue
 // @grant			GM_getValue
 // ==/UserScript==
-// Changelog: Implemented Saves and ability scores
+// Changelog: Implemented Saves
 
 (function() {
     'use strict';
-    var charswitcher = function(event) {
-        var e = window.event || event;
-        if (e.target.tagName !== 'BUTTON') {
-            return;
-        }
-        var id='';
-        var character='';
-        if(e.target.hasAttribute('type') && e.target.getAttribute('type') === 'roll') {
-            character = e.target;
-            while (!character.hasAttribute('data-characterid')) {
-                if(!character.parentNode) {
-                    return;
-                }
-                character = character.parentNode;
-            }
-            id = 'character|' + character.getAttribute('data-characterid');
-        } else if(e.target.hasAttribute('class') && e.target.getAttribute('class') === 'btn') {
-            var macro = e.target;
-            while (!macro.hasAttribute('data-macroid')) {
-                if(!macro.parentNode) {
-                    return;
-                }
-                macro = macro.parentNode;
-            }
-            id = 'character|' + (macro.getAttribute('data-macroid')).split('|')[0];
-        }
-        if(!id) {
-            return;
-        }
-        var select = document.getElementById('speakingas');
-        var x = Object.values(character);
-        console.log(x);
-
-        for (var i = 0; i < select.options.length; i++) {
-            if (select.options[i].value === id) {
-                select.selectedIndex = i;
-                return;
-            }
-        }
-    };
-
-    document.getElementsByTagName('body')[0].addEventListener('mousedown', charswitcher);
-    document.getElementsByClassName('tokenactions')[0].addEventListener('mousedown', charswitcher);
+    //document.getElementsByTagName('body')[0].addEventListener('mousedown', charswitcher);
+    //document.getElementsByClassName('tokenactions')[0].addEventListener('mousedown', charswitcher);
 
     var body = document.getElementById("zoomclick");
     var initiative = makeButton("INITIATIVE", "Initiative");
@@ -69,6 +25,54 @@
 
 
 })();
+
+function charswitcher(event) {
+    var e = window.event || event;
+    if (e.target.tagName !== 'BUTTON') {
+        return;
+    }
+    var id='';
+    var attributes = ''
+    if(e.target.hasAttribute('type') && e.target.getAttribute('type') === 'roll') {
+        var character = e.target;
+        while (!character.hasAttribute('data-characterid')) {
+            if(!character.parentNode) {
+                return;
+            }
+            character = character.parentNode;
+        }
+        id = 'character|' + character.getAttribute('data-characterid');
+        attributes = character.attributes;
+
+    } else if(e.target.hasAttribute('class') && e.target.getAttribute('class') === 'btn') {
+        var macro = e.target;
+        while (!macro.hasAttribute('data-macroid')) {
+            if(!macro.parentNode) {
+                return;
+            }
+            macro = macro.parentNode;
+        }
+        id = 'character|' + (macro.getAttribute('data-macroid')).split('|')[0];
+        attributes = macro.attributes;
+    }
+    if(!id) {
+        return;
+    }
+    var select = document.getElementById('speakingas');
+    console.log(id);
+    console.log(attributes);
+
+
+    for (var i = 0; i < select.options.length; i++) {
+        if (select.options[i].value === id) {
+            select.selectedIndex = i;
+            return;
+        }
+    }
+}
+
+
+
 
 function ability_table() {
     var table = document.createElement('Table');
@@ -142,3 +146,4 @@ function makeButton(name, stat) {
 
   return button;
 }
+
