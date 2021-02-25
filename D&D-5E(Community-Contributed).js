@@ -1,3 +1,5 @@
+// ==UserScript==
+// @name         D&D-5E(Community-Contributed)
 // @description		Some fixes for roll 20
 // @author			Ben Samsom
 // @match			https://app.roll20.net/editor/
@@ -146,4 +148,3 @@ function makeButton(name, stat) {
 
   return button;
 }
-
