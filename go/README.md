@@ -2,5 +2,10 @@
 
 This can be run with:
 ```
-go run test.go
+go run main.go
+```
+
+To create a binary:
+```
+go install
 ```
